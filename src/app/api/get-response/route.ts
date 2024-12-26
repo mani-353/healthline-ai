@@ -1,36 +1,68 @@
 import { NextResponse } from "next/server";
-import  { GoogleGenerativeAI }  from "@google/generative-ai";
+import diseases from "../../diseaseQuestions.json";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+interface SeverityFormula {
+  [key: string]: number;
+}
+
+interface DiseaseData {
+  questions: { id: number; text: string; key: string; type: string }[];
+  severityFormula: SeverityFormula;
+}
+
+interface Diseases {
+  [key: string]: DiseaseData;
+}
 
 export async function POST(request: Request) {
   try {
-    const { userInput } = await request.json();
+    const { responses, diseases: selectedDiseases }: { responses: Record<string, any>; diseases: string[] } = await request.json();
+
+    if (!selectedDiseases || selectedDiseases.length === 0) {
+      return NextResponse.json({ message: "No diseases selected." }, { status: 400 });
+    }
+
+    const matchedDiseases = selectedDiseases
+      .map((disease) => (diseases as Diseases)[disease])
+      .filter(Boolean); // Filter out invalid diseases
+
+    if (matchedDiseases.length === 0) {
+      return NextResponse.json({ message: "Invalid disease(s) selected." }, { status: 400 });
+    }
+
+    // Calculate severity for all selected diseases
+    const severityScores = matchedDiseases.map((diseaseData) => {
+      const severityFormula = diseaseData?.severityFormula || {};
+      return Object.keys(severityFormula).reduce((score, key) => {
+        return score + (responses[key] ? responses[key] * severityFormula[key] : 0);
+      }, 0);
+    });
+
+    const maxSeverityScore = Math.max(...severityScores);
+    const severity = maxSeverityScore >= 0.7 ? "High" : maxSeverityScore >= 0.4 ? "Moderate" : "Low";
 
     const geminiApiKey = process.env.GEMINI_API_KEY;
-    if (!geminiApiKey) {
-      throw new Error("GEMINI_API_KEY is not set in environment variables.");
-    }
+    if (!geminiApiKey) throw new Error("Missing Gemini API key.");
 
     const genAI = new GoogleGenerativeAI(geminiApiKey);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const result = await model.generateContent(userInput);
+    const prompt = `
+      Based on the details provided:
+      Diseases: ${selectedDiseases.join(", ")}
+      Symptoms and Responses: ${JSON.stringify(responses)}
+      Severity: ${severity}
+      Provide detailed precautions, basic medicines, diet, and measures to prevent recurrence.
+    `;
 
-    // Extract the response text
-    const rawText = result?.response?.text?.() || "No response from the model.";
+    const geminiResponse = await model.generateContent(prompt);
+    const rawText = geminiResponse?.response?.text?.() || "No response.";
 
-    // Optionally preprocess the text
-    const formattedText = rawText
-      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\*(.*?)\*/g, "<em>$1</em>")
-      .replace(/\n/g, "<br>")
-      .replace(/- (.*?)(?=\n|$)/g, "• $1<br>");
-
-    return NextResponse.json({ message: formattedText });
+    return NextResponse.json({ message: rawText });
   } catch (error) {
-    console.error("API Error:", error);
-    return NextResponse.json(
-      { message: "Internal server error." },
-      { status: 500 }
-    );
+    console.error("Error:", error);
+    return NextResponse.json({ message: "Internal server error." }, { status: 500 });
   }
 }
+
