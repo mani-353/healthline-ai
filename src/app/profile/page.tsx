@@ -1,10 +1,15 @@
 "use client";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import users from "@/data/users.json";
+
+// Set API base URL
+const API_BASE_URL = "http://localhost:8080";
 
 const Profile = () => {
   const { toast } = useToast();
@@ -12,28 +17,57 @@ const Profile = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [userData, setUserData] = useState<any>(null);
+  const router = useRouter();
 
-  const handleLogin = () => {
-    const user = users.users.find(
-      (u) => u.username === username && u.password === password
-    );
-
-    if (user) {
+  // Fetch user profile
+  const fetchUserProfile = async (token: string) => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/api/user/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setIsLoggedIn(true);
-      setUserData(user);
+      setUserData(response.data.user);
+      console.log("User profile:", response.data);
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+      setIsLoggedIn(false);
+      localStorage.removeItem("authToken");
+    }
+  };
+
+  // Handle login
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/api/user/signin`, {
+        username,
+        password,
+      });
+
+      const { token } = response.data;
+      localStorage.setItem("authToken", token);
+
       toast({
         title: "Success",
         description: "Logged in successfully",
       });
-    } else {
+
+      // Fetch user profile after login
+      fetchUserProfile(token);
+    } catch (error) {
+      console.error("Error during login:", error);
       toast({
         title: "Error",
-        description: "Invalid credentials",
+        description:
+          (axios.isAxiosError(error) && error.response?.data?.message) ||
+          "Invalid credentials",
         variant: "destructive",
       });
     }
   };
 
+  // Render login page
   if (!isLoggedIn) {
     return (
       <div className="container mx-auto px-4 pt-24">
@@ -65,49 +99,54 @@ const Profile = () => {
     );
   }
 
+  // Render dashboard
   return (
     <div className="container mx-auto px-4 pt-24">
-      <Card className="max-w-2xl mx-auto p-6">
-        <h1 className="text-2xl font-bold mb-6">Profile</h1>
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Name</label>
-            <p className="text-gray-700">{userData.name}</p>
+      <Card className="max-w-2xl mx-auto p-6 shadow-lg">
+        <h1 className="text-3xl font-bold mb-6 text-center">Welcome, {userData?.username}!</h1>
+        <div className="flex flex-col items-center space-y-6">
+          <img
+            src={userData?.image}
+            alt="Profile"
+            className="w-32 h-32 rounded-full border-2 border-gray-300"
+          />
+          <div className="w-full space-y-4">
+            <div className="flex justify-between items-center">
+              <span className="text-sm font-medium text-gray-600">Location:</span>
+              <span className="text-gray-800 font-semibold">{userData?.location}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm font-medium text-gray-600">Created At:</span>
+              <span className="text-gray-800 font-semibold">
+                {new Date(userData?.createdAt).toLocaleDateString()}
+              </span>
+            </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
-            <p className="text-gray-700">{userData.email}</p>
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Contact</label>
-            <p className="text-gray-700">{userData.contact}</p>
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Location</label>
-            <p className="text-gray-700">{userData.location}</p>
-          </div>
-          
-          <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-4">Medical Reports</h2>
-            {userData.reports.length > 0 ? (
-              <div className="space-y-4">
-                {userData.reports.map((report: any, index: number) => (
-                  <Card key={index} className="p-4">
-                    <h3 className="font-medium">{report.disease}</h3>
-                    <p className="text-sm text-gray-600">
-                      Severity: {report.severity}%
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      Approved by: {report.doctor}
-                    </p>
-                    <p className="mt-2">{report.diagnosis}</p>
-                  </Card>
-                ))}
-              </div>
-            ) : (
-              <p className="text-gray-600">No reports available</p>
-            )}
-          </div>
+        </div>
+
+        <div className="mt-8">
+          <h2 className="text-xl font-semibold mb-4 text-center">Medical Reports</h2>
+          {userData?.reports?.length > 0 ? (
+            <div className="space-y-4">
+              {userData.reports.map((report: any, index: number) => (
+                <Card
+                  key={index}
+                  className="p-4 border border-gray-300 rounded-lg shadow-md"
+                >
+                  <h3 className="font-medium">{report.disease}</h3>
+                  <p className="text-sm text-gray-600">
+                    Severity: {report.severity}%
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    Approved by: {report.doctor}
+                  </p>
+                  <p className="mt-2 text-gray-700">{report.diagnosis}</p>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-600 text-center">No reports available</p>
+          )}
         </div>
       </Card>
     </div>
