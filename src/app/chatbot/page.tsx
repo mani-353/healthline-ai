@@ -1,6 +1,9 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { saveAs } from "file-saver";
+import { useRouter } from "next/navigation";
+
 import diseases from "@/data/diseaseQuestions.json";
 import { jsPDF } from "jspdf";
 import MultiSelect from "@/components/MultiSelect";
@@ -46,6 +49,23 @@ const ChatBot = () => {
   const [waitingForResponse, setWaitingForResponse] = useState<boolean>(false);
   const [severity, setSeverity] = useState<number>(0);
   const [isDiagnosisComplete, setIsDiagnosisComplete] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const router = useRouter();
+  
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      toast({
+        title: "Unauthorized",
+        description: "You must log in to access the chatbot.",
+        variant: "destructive",
+      });
+      localStorage.setItem("redirectTo", "/chatbot");
+      router.push("/login");
+    }
+  }, [router, toast]);
 
   useEffect(() => {
     if (selectedDiseases.length > 0) {
@@ -194,6 +214,9 @@ const ChatBot = () => {
     const plainTextResponse = htmlToText(finalBotResponse);
     const responseLines = doc.splitTextToSize(plainTextResponse, 180);
 
+    //find speciality
+    const speciality = questions[0];
+    console.log(speciality);
     yPos += 10;
     responseLines.forEach((line: string | string[]) => {
       if (yPos > 280) {

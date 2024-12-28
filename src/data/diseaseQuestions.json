@@ -37,7 +37,11 @@
             "duration": 0.3,
             "chills": 0.2,
             "headache": 0.1
-        }
+        },
+        "specialist": [
+            "General Physician",
+            "Infectious Disease Specialist"
+        ]
     },
     "Cold": {
         "questions": [
@@ -77,7 +81,11 @@
             "congestion": 0.3,
             "sore_throat": 0.2,
             "fever": 0.1
-        }
+        },
+        "specialist": [
+            "ENT Specialist",
+            "General Physician"
+        ]
     },
     "Cough": {
         "questions": [
@@ -117,7 +125,11 @@
             "duration": 0.3,
             "chest_pain": 0.2,
             "fever": 0.1
-        }
+        },
+        "specialist": [
+            "Pulmonologist",
+            "General Physician"
+        ]
     },
     "Stomach Pain": {
         "questions": [
@@ -158,7 +170,11 @@
             "pain_type": 0.2,
             "diarrhea": 0.1,
             "fever": 0.1
-        }
+        },
+        "specialist": [
+            "Gastroenterologist",
+            "General Physician"
+        ]
     },
     "Diabetes": {
         "questions": [
@@ -198,7 +214,11 @@
             "urination": 0.3,
             "weight_loss": 0.2,
             "fatigue": 0.2
-        }
+        },
+        "specialist": [
+            "Endocrinologist",
+            "General Physician"
+        ]
     },
     "Hypertension": {
         "questions": [
@@ -238,7 +258,11 @@
             "headaches": 0.3,
             "dizziness": 0.2,
             "chest_pain": 0.1
-        }
+        },
+        "specialist": [
+            "Cardiologist",
+            "General Physician"
+        ]
     },
     "Asthma": {
         "questions": [
@@ -278,7 +302,11 @@
             "coughing": 0.3,
             "chest_tightness": 0.2,
             "night_symptoms": 0.1
-        }
+        },
+        "specialist": [
+            "Pulmonologist",
+            "Allergist"
+        ]
     },
     "Migraine": {
         "questions": [
@@ -318,48 +346,10 @@
             "side_pain": 0.3,
             "nausea": 0.2,
             "sensitivity": 0.2
-        }
-    },
-    "COVID-19": {
-        "questions": [
-            {
-                "id": 1,
-                "text": "Do you have a fever? (yes/no)",
-                "key": "fever",
-                "type": "yesno"
-            },
-            {
-                "id": 2,
-                "text": "Are you experiencing a dry cough? (yes/no)",
-                "key": "dry_cough",
-                "type": "yesno"
-            },
-            {
-                "id": 3,
-                "text": "Are you experiencing shortness of breath? (yes/no)",
-                "key": "shortness_breath",
-                "type": "yesno"
-            },
-            {
-                "id": 4,
-                "text": "Do you feel fatigue or body aches? (yes/no)",
-                "key": "fatigue",
-                "type": "yesno"
-            },
-            {
-                "id": 5,
-                "text": "Have you recently lost your sense of taste or smell? (yes/no)",
-                "key": "taste_smell_loss",
-                "type": "yesno"
-            }
-        ],
-        "severityFormula": {
-            "fever": 0.3,
-            "dry_cough": 0.3,
-            "shortness_breath": 0.2,
-            "taste_smell_loss": 0.1,
-            "fatigue": 0.1
-        }
+        },
+        "specialist": [
+            "Neurologist"
+        ]
     },
     "Flu (Influenza)": {
         "questions": [
@@ -371,7 +361,7 @@
             },
             {
                 "id": 2,
-                "text": "Do you have a fever over 100°F? (yes/no)",
+                "text": "Do you have a fever over 100\u00b0F? (yes/no)",
                 "key": "fever",
                 "type": "yesno"
             },
@@ -399,7 +389,10 @@
             "body_aches": 0.3,
             "fatigue": 0.2,
             "duration": 0.2
-        }
+        },
+        "specialist": [
+            "General Physician"
+        ]
     },
     "Tuberculosis (TB)": {
         "questions": [
@@ -439,7 +432,10 @@
             "blood_sputum": 0.3,
             "night_sweats": 0.2,
             "weight_loss": 0.2
-        }
+        },
+        "specialist": [
+            "Pulmonologist"
+        ]
     },
     "Malaria": {
         "questions": [
@@ -479,47 +475,11 @@
             "chills": 0.3,
             "nausea": 0.2,
             "travel_history": 0.2
-        }
-    },
-    "Eczema": {
-        "questions": [
-            {
-                "id": 1,
-                "text": "Do you have red, inflamed skin patches? (yes/no)",
-                "key": "red_patches",
-                "type": "yesno"
-            },
-            {
-                "id": 2,
-                "text": "Are the affected areas itchy? (yes/no)",
-                "key": "itchiness",
-                "type": "yesno"
-            },
-            {
-                "id": 3,
-                "text": "Do you notice any oozing or crusting on the patches? (yes/no)",
-                "key": "oozing",
-                "type": "yesno"
-            },
-            {
-                "id": 4,
-                "text": "How long have you had these symptoms?",
-                "key": "duration",
-                "type": "number"
-            },
-            {
-                "id": 5,
-                "text": "Do you have a family history of eczema or similar conditions? (yes/no)",
-                "key": "family_history",
-                "type": "yesno"
-            }
-        ],
-        "severityFormula": {
-            "itchiness": 0.3,
-            "oozing": 0.3,
-            "duration": 0.2,
-            "red_patches": 0.2
-        }
+        },
+        "specialist": [
+            "Infectious Disease Specialist",
+            "General Physician"
+        ]
     },
     "Psoriasis": {
         "questions": [
@@ -559,7 +519,10 @@
             "joint_pain": 0.3,
             "itch_burn": 0.2,
             "duration": 0.2
-        }
+        },
+        "specialist": [
+            "Dermatologist"
+        ]
     },
     "Depression": {
         "questions": [
@@ -599,7 +562,10 @@
             "sadness": 0.3,
             "sleep_changes": 0.2,
             "concentration": 0.1
-        }
+        },
+        "specialist": [
+            "Psychiatrist"
+        ]
     },
     "Anxiety Disorders": {
         "questions": [
@@ -639,87 +605,10 @@
             "physical_symptoms": 0.3,
             "interference": 0.2,
             "avoidance": 0.2
-        }
-    },
-    "Thrombocytopenia": {
-        "questions": [
-            {
-                "id": 1,
-                "text": "Have you experienced unusual bleeding or bruising? (yes/no)",
-                "key": "bleeding_bruising",
-                "type": "yesno"
-            },
-            {
-                "id": 2,
-                "text": "Do you have frequent nosebleeds or gum bleeding? (yes/no)",
-                "key": "nosebleeds_gum_bleeding",
-                "type": "yesno"
-            },
-            {
-                "id": 3,
-                "text": "Do you have fatigue or weakness? (yes/no)",
-                "key": "fatigue",
-                "type": "yesno"
-            },
-            {
-                "id": 4,
-                "text": "Are you experiencing dizziness or lightheadedness? (yes/no)",
-                "key": "dizziness",
-                "type": "yesno"
-            },
-            {
-                "id": 5,
-                "text": "Have you recently had any infections or illnesses? (yes/no)",
-                "key": "infections",
-                "type": "yesno"
-            }
-        ],
-        "severityFormula": {
-            "bleeding_bruising": 0.4,
-            "fatigue": 0.3,
-            "nosebleeds_gum_bleeding": 0.2,
-            "dizziness": 0.1
-        }
-    },
-    "Thrombocythemia": {
-        "questions": [
-            {
-                "id": 1,
-                "text": "Do you experience headaches or migraines? (yes/no)",
-                "key": "headaches",
-                "type": "yesno"
-            },
-            {
-                "id": 2,
-                "text": "Are you experiencing dizziness or lightheadedness? (yes/no)",
-                "key": "dizziness",
-                "type": "yesno"
-            },
-            {
-                "id": 3,
-                "text": "Do you have chest pain or a feeling of pressure? (yes/no)",
-                "key": "chest_pain",
-                "type": "yesno"
-            },
-            {
-                "id": 4,
-                "text": "Do you have weakness or numbness in your limbs? (yes/no)",
-                "key": "weakness",
-                "type": "yesno"
-            },
-            {
-                "id": 5,
-                "text": "Have you had a history of blood clots? (yes/no)",
-                "key": "blood_clots",
-                "type": "yesno"
-            }
-        ],
-        "severityFormula": {
-            "headaches": 0.3,
-            "chest_pain": 0.3,
-            "dizziness": 0.2,
-            "blood_clots": 0.2
-        }
+        },
+        "specialist": [
+            "Psychiatrist"
+        ]
     },
     "Platelet Function Disorders": {
         "questions": [
@@ -759,7 +648,10 @@
             "delayed_bleeding": 0.3,
             "nosebleeds_gum_bleeding": 0.2,
             "easy_bruising": 0.2
-        }
+        },
+        "specialist": [
+            "Hematologist"
+        ]
     },
     "Coronary Artery Disease (CAD)": {
         "questions": [
@@ -799,7 +691,10 @@
             "shortness_breath": 0.3,
             "high_bp_cholesterol": 0.2,
             "dizziness": 0.1
-        }
+        },
+        "specialist": [
+            "Cardiologist"
+        ]
     },
     "Heart Failure": {
         "questions": [
@@ -839,47 +734,10 @@
             "swelling": 0.3,
             "fatigue": 0.2,
             "rapid_weight_gain": 0.1
-        }
-    },
-    "Arrhythmia": {
-        "questions": [
-            {
-                "id": 1,
-                "text": "Do you feel a racing or fluttering heart? (yes/no)",
-                "key": "racing_heart",
-                "type": "yesno"
-            },
-            {
-                "id": 2,
-                "text": "Do you experience dizziness, fainting, or lightheadedness? (yes/no)",
-                "key": "fainting",
-                "type": "yesno"
-            },
-            {
-                "id": 3,
-                "text": "Do you have a history of palpitations? (yes/no)",
-                "key": "palpitations",
-                "type": "yesno"
-            },
-            {
-                "id": 4,
-                "text": "Have you experienced chest pain or tightness? (yes/no)",
-                "key": "chest_tightness",
-                "type": "yesno"
-            },
-            {
-                "id": 5,
-                "text": "Do you often feel short of breath or weak? (yes/no)",
-                "key": "shortness_breath",
-                "type": "yesno"
-            }
-        ],
-        "severityFormula": {
-            "racing_heart": 0.3,
-            "fainting": 0.3,
-            "chest_tightness": 0.2,
-            "shortness_breath": 0.2
-        }
+        },
+        "specialist": [
+            "Cardiologist"
+        ]
     },
     "Valvular Heart Disease": {
         "questions": [
@@ -919,7 +777,10 @@
             "fatigue": 0.3,
             "irregular_heartbeat": 0.2,
             "swelling": 0.2
-        }
+        },
+        "specialist": [
+            "Cardiologist"
+        ]
     },
     "Urinary Tract Infection (UTI)": {
         "questions": [
@@ -978,7 +839,10 @@
             "abdominal_pain": 0.2,
             "fever_chills": 0.2,
             "blood_in_urine": 0.1
-        }
+        },
+        "specialist": [
+            "Urologist"
+        ]
     },
     "Kidney Stones": {
         "questions": [
@@ -1018,7 +882,10 @@
             "wave_pain": 0.3,
             "blood_in_urine": 0.2,
             "nausea_vomiting": 0.1
-        }
+        },
+        "specialist": [
+            "Urologist"
+        ]
     },
     "Urinary Incontinence": {
         "questions": [
@@ -1058,7 +925,10 @@
             "urgent_urination": 0.3,
             "difficulty_controlling": 0.2,
             "leakage_activity": 0.1
-        }
+        },
+        "specialist": [
+            "Urologist"
+        ]
     },
     "Hematuria (Blood in Urine)": {
         "questions": [
@@ -1098,7 +968,10 @@
             "pain_urination": 0.3,
             "back_abdominal_pain": 0.1,
             "swelling": 0.1
-        }
+        },
+        "specialist": [
+            "Urologist"
+        ]
     },
     "Urinary Retention": {
         "questions": [
@@ -1138,7 +1011,10 @@
             "bladder_not_empty": 0.3,
             "slow_weak_stream": 0.2,
             "lower_abdomen_pain": 0.2
-        }
+        },
+        "specialist": [
+            "Urologist"
+        ]
     },
     "Anemia": {
         "questions": [
@@ -1178,7 +1054,10 @@
             "shortness_of_breath": 0.3,
             "pale_skin": 0.2,
             "dizziness": 0.1
-        }
+        },
+        "specialist": [
+            "Hematologist"
+        ]
     },
     "Hemophilia": {
         "questions": [
@@ -1218,7 +1097,10 @@
             "excessive_bleeding": 0.4,
             "bleeding_after_procedures": 0.2,
             "joint_pain": 0.1
-        }
+        },
+        "specialist": [
+            "Hematologist"
+        ]
     },
     "Leukemia": {
         "questions": [
@@ -1258,7 +1140,10 @@
             "fatigue": 0.3,
             "infections_fever": 0.2,
             "bone_pain": 0.2
-        }
+        },
+        "specialist": [
+            "Hematologist/Oncologist"
+        ]
     },
     "Sickle Cell Disease": {
         "questions": [
@@ -1298,47 +1183,10 @@
             "swelling": 0.3,
             "frequent_infections": 0.2,
             "fatigue": 0.1
-        }
-    },
-    "Thrombocytopenia": {
-        "questions": [
-            {
-                "id": 1,
-                "text": "Do you bruise easily or experience frequent unexplained bruising? (yes/no)",
-                "key": "bruising",
-                "type": "yesno"
-            },
-            {
-                "id": 2,
-                "text": "Have you had excessive bleeding during minor cuts or injuries? (yes/no)",
-                "key": "excessive_bleeding",
-                "type": "yesno"
-            },
-            {
-                "id": 3,
-                "text": "Do you have a history of frequent nosebleeds or gum bleeding? (yes/no)",
-                "key": "nosebleeds_gum_bleeding",
-                "type": "yesno"
-            },
-            {
-                "id": 4,
-                "text": "Have you noticed red or purple spots on your skin? (yes/no)",
-                "key": "skin_spots",
-                "type": "yesno"
-            },
-            {
-                "id": 5,
-                "text": "Do you have any unusual heavy menstrual periods? (yes/no)",
-                "key": "heavy_menstrual",
-                "type": "yesno"
-            }
-        ],
-        "severityFormula": {
-            "bruising": 0.3,
-            "excessive_bleeding": 0.4,
-            "nosebleeds_gum_bleeding": 0.2,
-            "skin_spots": 0.1
-        }
+        },
+        "specialist": [
+            "Hematologist"
+        ]
     },
     "Polycystic Ovary Syndrome (PCOS)": {
         "questions": [
@@ -1378,7 +1226,10 @@
             "excessive_hair_growth": 0.3,
             "acne_oily_skin": 0.2,
             "difficulty_losing_weight": 0.2
-        }
+        },
+        "specialist": [
+            "Gynecologist"
+        ]
     },
     "Endometriosis": {
         "questions": [
@@ -1419,7 +1270,10 @@
             "pelvic_pain": 0.2,
             "pain_urination_bowel": 0.1,
             "heavy_bleeding": 0.1
-        }
+        },
+        "specialist": [
+            "Gynecologist"
+        ]
     },
     "Breast Cancer": {
         "questions": [
@@ -1460,7 +1314,10 @@
             "nipple_discharge": 0.2,
             "family_history": 0.1,
             "skin_changes": 0.1
-        }
+        },
+        "specialist": [
+            "Oncologist"
+        ]
     },
     "Ovarian Cancer": {
         "questions": [
@@ -1501,7 +1358,10 @@
             "frequent_urination": 0.2,
             "weight_loss_fatigue": 0.1,
             "bowel_changes": 0.1
-        }
+        },
+        "specialist": [
+            "Oncologist"
+        ]
     },
     "Cervical Cancer": {
         "questions": [
@@ -1541,7 +1401,10 @@
             "unusual_discharge": 0.3,
             "pelvic_pain": 0.2,
             "hpv_history": 0.1
-        }
+        },
+        "specialist": [
+            "Oncologist"
+        ]
     },
     "Fibroids": {
         "questions": [
@@ -1582,7 +1445,10 @@
             "urination_problems": 0.2,
             "back_pain_intercourse": 0.1,
             "constipation_bloating": 0.1
-        }
+        },
+        "specialist": [
+            "Gynecologist"
+        ]
     },
     "Menstrual Disorders": {
         "questions": [
@@ -1623,89 +1489,10 @@
             "pms_symptoms": 0.2,
             "abnormal_bleeding": 0.1,
             "painful_cramps": 0.1
-        }
-    },
-    "Pelvic Inflammatory Disease (PID)": {
-        "questions": [
-            {
-                "id": 1,
-                "text": "Do you experience pelvic pain or discomfort? (yes/no)",
-                "key": "pelvic_pain",
-                "type": "yesno"
-            },
-            {
-                "id": 2,
-                "text": "Do you have pain during sexual intercourse? (yes/no)",
-                "key": "pain_intercourse",
-                "type": "yesno"
-            },
-            {
-                "id": 3,
-                "text": "Do you have abnormal vaginal discharge with a foul odor? (yes/no)",
-                "key": "abnormal_discharge",
-                "type": "yesno"
-            },
-            {
-                "id": 4,
-                "text": "Do you have fever or chills along with pelvic pain? (yes/no)",
-                "key": "fever_chills",
-                "type": "yesno"
-            },
-            {
-                "id": 5,
-                "text": "Do you experience painful urination or irregular periods? (yes/no)",
-                "key": "painful_urination_irregular_periods",
-                "type": "yesno"
-            }
-        ],
-        "severityFormula": {
-            "pelvic_pain": 0.3,
-            "pain_intercourse": 0.3,
-            "abnormal_discharge": 0.2,
-            "fever_chills": 0.1,
-            "painful_urination_irregular_periods": 0.1
-        }
-    },
-    "Chronic Obstructive Pulmonary Disease (COPD)": {
-        "questions": [
-            {
-                "id": 1,
-                "text": "Do you experience persistent coughing or sputum production? (yes/no)",
-                "key": "persistent_coughing",
-                "type": "yesno"
-            },
-            {
-                "id": 2,
-                "text": "Do you experience shortness of breath, especially during physical activities? (yes/no)",
-                "key": "shortness_of_breath",
-                "type": "yesno"
-            },
-            {
-                "id": 3,
-                "text": "Do you have a history of smoking or exposure to lung irritants? (yes/no)",
-                "key": "smoking_history",
-                "type": "yesno"
-            },
-            {
-                "id": 4,
-                "text": "Do you experience wheezing or a whistling sound when breathing? (yes/no)",
-                "key": "wheezing",
-                "type": "yesno"
-            },
-            {
-                "id": 5,
-                "text": "Do you experience frequent respiratory infections? (yes/no)",
-                "key": "frequent_infections",
-                "type": "yesno"
-            }
-        ],
-        "severityFormula": {
-            "persistent_coughing": 0.3,
-            "shortness_of_breath": 0.3,
-            "smoking_history": 0.2,
-            "wheezing": 0.1,
-            "frequent_infections": 0.1
-        }
+        },
+        "specialist": [
+            "Gynecologist"
+        ]
     },
     "Pneumonia": {
         "questions": [
@@ -1746,7 +1533,10 @@
             "difficulty_breathing": 0.3,
             "fever_chills": 0.1,
             "history_of_infections": 0.1
-        }
+        },
+        "specialist": [
+            "Pulmonologist"
+        ]
     },
     "Lung Cancer": {
         "questions": [
@@ -1787,7 +1577,10 @@
             "weight_loss_fatigue": 0.2,
             "smoking_exposure": 0.1,
             "difficulty_breathing": 0.1
-        }
+        },
+        "specialist": [
+            "Oncologist"
+        ]
     },
     "Bronchitis": {
         "questions": [
@@ -1828,48 +1621,10 @@
             "shortness_of_breath": 0.3,
             "smoking_history": 0.1,
             "frequent_infections": 0.1
-        }
-    },
-    "Pulmonary Embolism": {
-        "questions": [
-            {
-                "id": 1,
-                "text": "Do you experience sudden shortness of breath or difficulty breathing? (yes/no)",
-                "key": "sudden_shortness_breath",
-                "type": "yesno"
-            },
-            {
-                "id": 2,
-                "text": "Do you have chest pain, especially when breathing deeply or coughing? (yes/no)",
-                "key": "chest_pain",
-                "type": "yesno"
-            },
-            {
-                "id": 3,
-                "text": "Do you have swelling or pain in one leg? (yes/no)",
-                "key": "swelling_leg",
-                "type": "yesno"
-            },
-            {
-                "id": 4,
-                "text": "Have you recently undergone surgery or had a long period of immobility? (yes/no)",
-                "key": "recent_surgery_immobility",
-                "type": "yesno"
-            },
-            {
-                "id": 5,
-                "text": "Do you have a history of blood clots or deep vein thrombosis (DVT)? (yes/no)",
-                "key": "blood_clots_history",
-                "type": "yesno"
-            }
-        ],
-        "severityFormula": {
-            "sudden_shortness_breath": 0.4,
-            "chest_pain": 0.3,
-            "swelling_leg": 0.2,
-            "recent_surgery_immobility": 0.1,
-            "blood_clots_history": 0.1
-        }
+        },
+        "specialist": [
+            "Pulmonologist"
+        ]
     },
     "Interstitial Lung Disease": {
         "questions": [
@@ -1910,7 +1665,10 @@
             "fatigue": 0.2,
             "chest_discomfort": 0.1,
             "environmental_exposure": 0.1
-        }
+        },
+        "specialist": [
+            "Pulmonologist"
+        ]
     },
     "Back Pain": {
         "questions": [
@@ -1951,7 +1709,10 @@
             "movement_pain": 0.2,
             "numbness": 0.2,
             "injury_history": 0.1
-        }
+        },
+        "specialist": [
+            "Orthopedic Surgeon"
+        ]
     },
     "Neck Pain": {
         "questions": [
@@ -1992,7 +1753,10 @@
             "movement_pain": 0.2,
             "stiffness": 0.2,
             "injury_history": 0.1
-        }
+        },
+        "specialist": [
+            "Orthopedic Surgeon"
+        ]
     },
     "Eye Pain": {
         "questions": [
@@ -2033,7 +1797,10 @@
             "blurred_vision": 0.2,
             "dryness": 0.2,
             "trauma_history": 0.1
-        }
+        },
+        "specialist": [
+            "Ophthalmologist"
+        ]
     },
     "Ear Pain": {
         "questions": [
@@ -2074,7 +1841,10 @@
             "tinnitus": 0.2,
             "dizziness": 0.2,
             "infection_history": 0.1
-        }
+        },
+        "specialist": [
+            "ENT Specialist"
+        ]
     },
     "Running Nose": {
         "questions": [
@@ -2115,7 +1885,10 @@
             "congestion": 0.2,
             "sneezing": 0.1,
             "fever": 0.1
-        }
+        },
+        "specialist": [
+            "ENT Specialist"
+        ]
     },
     "Body Pains": {
         "questions": [
@@ -2156,7 +1929,10 @@
             "fatigue": 0.2,
             "fever": 0.2,
             "activity": 0.1
-        }
+        },
+        "specialist": [
+            "General Physician"
+        ]
     },
     "Rashes": {
         "questions": [
@@ -2197,7 +1973,10 @@
             "blisters": 0.2,
             "product_exposure": 0.2,
             "associated_symptoms": 0.1
-        }
+        },
+        "specialist": [
+            "General Physician"
+        ]
     },
     "Headache": {
         "questions": [
@@ -2238,7 +2017,10 @@
             "pain_location": 0.2,
             "associated_symptoms": 0.2,
             "trigger_factors": 0.1
-        }
+        },
+        "specialist": [
+            "General Physician"
+        ]
     },
     "Breathing Problem": {
         "questions": [
@@ -2279,7 +2061,10 @@
             "wheezing": 0.2,
             "chest_pain": 0.1,
             "medical_history": 0.1
-        }
+        },
+        "specialist": [
+            "General Physician"
+        ]
     },
     "Vomiting Sensation": {
         "questions": [
@@ -2320,7 +2105,10 @@
             "abdominal_pain": 0.2,
             "fever_or_dehydration": 0.2,
             "food_history": 0.1
-        }
+        },
+        "specialist": [
+            "General Physician"
+        ]
     },
     "Tiredness": {
         "questions": [
@@ -2361,7 +2149,10 @@
             "associated_symptoms": 0.2,
             "sleep_or_workload": 0.1,
             "medical_condition": 0.1
-        }
+        },
+        "specialist": [
+            "General Physician"
+        ]
     },
     "Loose Motions": {
         "questions": [
@@ -2402,7 +2193,10 @@
             "abdominal_pain": 0.2,
             "blood_or_mucus": 0.2,
             "hydration_status": 0.1
-        }
+        },
+        "specialist": [
+            "General Physician"
+        ]
     },
     "Mouth Ulcers": {
         "questions": [
@@ -2443,7 +2237,10 @@
             "number_of_ulcers": 0.2,
             "associated_symptoms": 0.1,
             "trigger_factors": 0.1
-        }
+        },
+        "specialist": [
+            "General Physician"
+        ]
     },
     "Throat Pain": {
         "questions": [
@@ -2484,7 +2281,10 @@
             "fever_or_swelling": 0.2,
             "difficulty": 0.2,
             "exposure": 0.1
-        }
+        },
+        "specialist": [
+            "General Physician"
+        ]
     },
     "Sinus": {
         "questions": [
@@ -2525,7 +2325,10 @@
             "facial_pain": 0.2,
             "headache_or_fever": 0.2,
             "post_nasal_drip": 0.1
-        }
+        },
+        "specialist": [
+            "General Physician"
+        ]
     },
     "Indigestion": {
         "questions": [
@@ -2566,7 +2369,10 @@
             "abdominal_pain": 0.2,
             "burning_or_nausea": 0.2,
             "dietary_triggers": 0.1
-        }
+        },
+        "specialist": [
+            "General Physician"
+        ]
     },
     "Gastric Issues": {
         "questions": [
@@ -2607,6 +2413,10 @@
             "abdominal_pain": 0.2,
             "dietary_triggers": 0.2,
             "bowel_history": 0.1
-        }
+        },
+        "specialist": [
+            "General Physician",
+            "Gastroenterologist"
+        ]
     }
 }

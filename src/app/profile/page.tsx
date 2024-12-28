@@ -3,23 +3,17 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Login from "../login/page";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
 
-// Set API base URL
 const API_BASE_URL = "http://localhost:8080";
 
 const Profile = () => {
-  const { toast } = useToast();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [userData, setUserData] = useState<any>(null);
   const router = useRouter();
 
-  // Fetch user profile
+  // Fetch the user's profile using the auth token
   const fetchUserProfile = async (token: string) => {
     try {
       const response = await axios.get(`${API_BASE_URL}/api/user/profile`, {
@@ -29,7 +23,6 @@ const Profile = () => {
       });
       setIsLoggedIn(true);
       setUserData(response.data.user);
-      console.log("User profile:", response.data);
     } catch (error) {
       console.error("Error fetching user profile:", error);
       setIsLoggedIn(false);
@@ -37,69 +30,29 @@ const Profile = () => {
     }
   };
 
-  // Handle login
-  const handleLogin = async () => {
-    try {
-      const response = await axios.post(`${API_BASE_URL}/api/user/signin`, {
-        username,
-        password,
-      });
-
-      const { token } = response.data;
-      localStorage.setItem("authToken", token);
-
-      toast({
-        title: "Success",
-        description: "Logged in successfully",
-      });
-
-      // Fetch user profile after login
+  // Redirect to login if not logged in, or fetch the user profile if logged in
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
       fetchUserProfile(token);
-    } catch (error) {
-      console.error("Error during login:", error);
-      toast({
-        title: "Error",
-        description:
-          (axios.isAxiosError(error) && error.response?.data?.message) ||
-          "Invalid credentials",
-        variant: "destructive",
-      });
+    } else {
+      // Store the current path in localStorage so it can be used to redirect after login
+      localStorage.setItem("redirectTo", "/profile");
+      router.push("/login"); // Redirect to login if not logged in
     }
+  }, [router]);
+
+  const handleLoginSuccess = (token: string) => {
+    setIsLoggedIn(true);
+    fetchUserProfile(token);
   };
 
-  // Render login page
+  // Show login page if the user is not logged in
   if (!isLoggedIn) {
-    return (
-      <div className="container mx-auto px-4 pt-24">
-        <Card className="max-w-md mx-auto p-6">
-          <h1 className="text-2xl font-bold mb-6">User Login</h1>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">Username</label>
-              <Input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Password</label>
-              <Input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <Button className="w-full" onClick={handleLogin}>
-              Login
-            </Button>
-          </div>
-        </Card>
-      </div>
-    );
+    return <Login/>;
   }
 
-  // Render dashboard
+  // Show the profile if the user is logged in
   return (
     <div className="container mx-auto px-4 pt-24">
       <Card className="max-w-2xl mx-auto p-6 shadow-lg">
